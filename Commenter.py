@@ -70,6 +70,7 @@ class Commenter:
 
         try:
             comment_box_elem = lambda: self.driver.find_element_by_xpath("//textarea[@aria-label='Add a comment…']")
+            comment_box_elem().click()
             comment_box_elem().send_keys('')
             comment_box_elem().clear()
             for letter in comment_text:
@@ -140,6 +141,5 @@ for pic in com.get_pictures_on_page(hashtag='newyork'):
     print(pic)
 #    com.driver.get(pic)
 #    time.sleep(2)
-#    print(com.comment_on_picture())
 #    print('Posted Comment:', com.comment_on_picture())
     time.sleep(3)
