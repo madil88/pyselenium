@@ -25,7 +25,7 @@ class Commenter:
         driver = self.driver
         driver.get("https://www.instagram.com/")
         time.sleep(2)
-        login_button = driver.find_element_by_xpath("//a[@href='/accounts/login/']")
+        login_button = driver.find_element_by_xpath("//a[@href='/accounts/login/?source=auth_switcher']")
         login_button.click()
         time.sleep(2)
         user_name_elem = driver.find_element_by_xpath("//input[@name='username']")
@@ -38,13 +38,13 @@ class Commenter:
         time.sleep(2)
 
     """getting pictures on a hashtag page"""
-    def get_pictures_on_page(self, hashtag, scrolls=int):
+    def get_pictures_on_page(self, hashtag):
         self.driver.get("https://www.instagram.com/explore/tags/" + hashtag + "/")
         time.sleep(2)
 
         # gathering photos
         pic_hrefs = []
-        for i in range(1, scrolls):
+        for i in range(1, 5):
             try:
                 self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(2)
@@ -52,7 +52,7 @@ class Commenter:
                 hrefs_in_view = self.driver.find_elements_by_tag_name('a')
                 # finding relevant hrefs
                 hrefs_in_view = [elem.get_attribute('href') for elem in hrefs_in_view if
-                                 hashtag in elem.get_attribute('href')]
+                                 '.com/p/' in elem.get_attribute('href')]
                 # building list of unique photos
                 [pic_hrefs.append(href) for href in hrefs_in_view if href not in pic_hrefs]
                 # print("Check: pic href length " + str(len(pic_hrefs)))
@@ -129,12 +129,17 @@ class Commenter:
         return self.post_comment(response)
 
 
-com = Commenter(username='USERNAME', password='PASSWORD')
+com = Commenter(username='adil68616e6961', password='HaniaAdil93')
 com.login()
 
-for pic in com.get_pictures_on_page(hashtag='newyork', scrolls=5)[1:]:
-    com.driver.get(pic)
-    time.sleep(3)
-    print('Posted Comment:', com.comment_on_picture())
-    time.sleep(3)
+#com.driver.get('https://www.instagram.com/p/Bq5cc5')
+#print(com.get_comments())
+#print('Posted Comment', com.comment_on_picture())
 
+for pic in com.get_pictures_on_page(hashtag='newyork'):
+    print(pic)
+#    com.driver.get(pic)
+#    time.sleep(2)
+#    print(com.comment_on_picture())
+#    print('Posted Comment:', com.comment_on_picture())
+    time.sleep(3)
