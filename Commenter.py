@@ -130,7 +130,7 @@ class Commenter:
         return self.post_comment(response)
 
 
-com = Commenter(username='adil68616e6961', password='HaniaAdil93')
+com = Commenter(username='xxxxxxx', password='xxxxxx')
 com.login()
 
 #com.driver.get('https://www.instagram.com/p/Bq5cc5')
