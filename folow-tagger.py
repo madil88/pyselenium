@@ -88,8 +88,8 @@ class InstagramBot:
 
 
 
-username = "adil68616e6961"
-password = "HaniaAdil93"
+username = "xxxxxx"
+password = "xxxxxx"
 
 ig = InstagramBot(username, password)
 ig.login()
